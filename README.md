@@ -64,31 +64,30 @@ since the work value scales like n scales
 
 - [ ] 5. (4 points) Now that you have a nice way to empirically generate valuess of $W(n)$, we can look at the relationship between $a$, $b$, and $f(n)$. Suppose that $f(n) = n^c$. What is the asypmptotic behavior of $W(n)$ if $c < \log_b a$? What about $c > \log_b a$? And if they are equal? Modify `test_compare_work` to compare empirical values for different work functions (at several different values of $n$) to justify your answer. 
 
-Table: Work Comparison for Different f(n) Cases
-|   n   |  W_1 (O(n))  |  W_2 (O(n^2))  |  W_3 (O(n log n))  |
-|-------|--------------|---------------|------------------|
-|     10 | 21.291267864660337 |           174 |               36 |
-|     20 | 47.054671684320255 |           748 |               92 |
-|     50 | 110.23620513578395 |          4790 |              276 |
-|    100 | 230.4724102715679 |         19580 |              652 |
-|   1000 | 2075.117102760963 |       1990744 |             9120 |
-|   5000 | 14251.20819850244 |      49957880 |            61728 |
+Table: Work Comparison for Different Values of b
+|   n   |  W_1 (Root-Dominated, b=2)  |  W_2 (Balanced, b=4)  |  W_3 (Leaf-Dominated, b=8)  |
+|-------|----------------------------|----------------------|----------------------|
+|     10 |                         1068 |                    196 |                    108 |
+|     20 |                         8944 |                    664 |                    496 |
+|     50 |                       104780 |                   4740 |                   2852 |
+|    100 |                       848240 |                  17816 |                  11216 |
+|   1000 |                    509190592 |                1930848 |                1139912 |
+|   5000 |                 143543110592 |               49110112 |               28559944 |
 
-When c is less than log_b(a), we expect that the estimated complexity will be O(n^(log_b a)), which is close to the O(n) time complexity, because it is leaf dominated, which is indicated by the almost linear growth of the function shown by the data. When c > log_b(a), we will expect an O(n^c), ( O(n^2) in this case) time complexity, meaning it is root dominated, which is supported by the exponential growth of the data shown. When c = log_b(a), the estimated time complexity will be n^c * logn, as it is balanced, or just nlogn time complexity, which increases faster than O(n), but slower than O(n^2).
+These results align with our initial thinking because when c < log_b (a) in the root dominated system, recursion dominates, which leads to more work, and in the leaf dominated system, where c > log_b(a), the growth is a lot slower. The balanced system has an intermediate growth, which is also consistent as c = log_b(a).
 
 - [ ] 6. (3 points) $W(n)$ is meant to represent the running time of some recursive algorithm. Suppose we always had $a$ processors available to us and we wanted to compute the span of the same algorithm. Implement the function `span_calc` to compute the empirical span, where the work of the algorithm is given by $W(n)$. Implement `test_compare_span` to create a new comparison function for comparing span functions. Derive the asymptotic expressions for the span of the recurrences you used in problem 4 above. Confirm that everything matches up as it should. 
 
-test_main.py 
-Comparing Span Cases (Parallel Execution Time):
 
-Table: Span Comparison for Different f(n) Cases
-|   n   |  S_1 (O(log n))  |  S_2 (O(n))  |  S_3 (O(n^2))  |
-|-------|-----------------|-------------|--------------|
-|     10 |               4 |          18 |           130 |
-|     20 |               5 |          38 |           530 |
-|     50 |               6 |          97 |          3315 |
-|    100 |               7 |         197 |         13315 |
-|   1000 |              10 |        1994 |       1333214 |
-|   5000 |              13 |        9995 |      33332873 |
+Table: Span Comparison for Different Growth Rates
+|   n   |  S_1 (O(1))  |  S_2 (O(log n))  |  S_3 (O(n))  |
+|-------|--------------|-----------------|--------------|
+|     10 |            4 |        5.605170 |           18 |
+|     20 |            5 |        8.600902 |           38 |
+|     50 |            6 |       13.506177 |           97 |
+|    100 |            7 |       18.111347 |          197 |
+|   1000 |           10 |       37.785832 |         1994 |
+|   5000 |           13 |       56.944124 |         9995 |
 
-This also matches our knowledge because the span of O(logn) is the lowest power of 2 that is larger than n, which makes sense because thats how many splits there would need to be in the branches to cover all the. It follows that the depth of O(n) would increase linearly because as more elements are added, there is a linear relation to the amount of dependencies that are added, which is why that increase is correlated. For O(n^2), the same idea takes place as adding a linear amount of data would cause a growth exponentialy larger than the n being added.
+
+The results for this are consistent as well because for O(n) the span maintains mostly constant, for O(logn) corresponds to a balanced recursive tree, which follows a similar shape to logn, and finally, O(n) follows a very linear shape. The span is mostly proportional to the function itself.
