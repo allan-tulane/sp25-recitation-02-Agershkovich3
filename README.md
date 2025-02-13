@@ -67,13 +67,12 @@ since the work value scales like n scales
 Table: Work Comparison for Different Values of b
 |   n   |  W_1 (Root-Dominated, b=2)  |  W_2 (Balanced, b=4)  |  W_3 (Work-Dominated, b=8)  |
 |-------|----------------------------|----------------------|----------------------|
-|     10 |                         1068 |                    196 |                    108 |
-|     20 |                         8944 |                    664 |                    496 |
-|     50 |                       104780 |                   4740 |                   2852 |
-|    100 |                       848240 |                  17816 |                  11216 |
-|   1000 |                    509190592 |                1930848 |                1139912 |
-|   5000 |                 143543110592 |               49110112 |               28559944 |
-
+|     10 |                         5620 |                    420 |                    116 |
+|     20 |                        90320 |                   1056 |                    720 |
+|     50 |                      1835220 |                  11204 |                   3332 |
+|    100 |                     29373520 |                  33312 |                  12560 |
+|   1000 |                 125646995264 |                5544064 |                1311696 |
+|   5000 |              377097053334848 |              157053056 |               33204816 |
 
 These results align with our initial thinking because when c < log_b (a) in the root dominated system, recursion dominates, which leads to more work, and in the leaf dominated system, where c > log_b(a), the growth is a lot slower. The balanced system has an intermediate growth, which is also consistent as c = log_b(a).
 
