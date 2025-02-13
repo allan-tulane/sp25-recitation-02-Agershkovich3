@@ -65,7 +65,7 @@ since the work value scales like n scales
 - [ ] 5. (4 points) Now that you have a nice way to empirically generate valuess of $W(n)$, we can look at the relationship between $a$, $b$, and $f(n)$. Suppose that $f(n) = n^c$. What is the asypmptotic behavior of $W(n)$ if $c < \log_b a$? What about $c > \log_b a$? And if they are equal? Modify `test_compare_work` to compare empirical values for different work functions (at several different values of $n$) to justify your answer. 
 
 Table: Work Comparison for Different Values of b
-|   n   |  W_1 (Root-Dominated, b=2)  |  W_2 (Balanced, b=4)  |  W_3 (Leaf-Dominated, b=8)  |
+|   n   |  W_1 (Root-Dominated, b=2)  |  W_2 (Balanced, b=4)  |  W_3 (Work-Dominated, b=8)  |
 |-------|----------------------------|----------------------|----------------------|
 |     10 |                         1068 |                    196 |                    108 |
 |     20 |                         8944 |                    664 |                    496 |
@@ -73,6 +73,7 @@ Table: Work Comparison for Different Values of b
 |    100 |                       848240 |                  17816 |                  11216 |
 |   1000 |                    509190592 |                1930848 |                1139912 |
 |   5000 |                 143543110592 |               49110112 |               28559944 |
+
 
 These results align with our initial thinking because when c < log_b (a) in the root dominated system, recursion dominates, which leads to more work, and in the leaf dominated system, where c > log_b(a), the growth is a lot slower. The balanced system has an intermediate growth, which is also consistent as c = log_b(a).
 

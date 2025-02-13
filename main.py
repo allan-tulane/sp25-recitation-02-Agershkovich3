@@ -102,4 +102,4 @@ if __name__ == "__main__":
 	print("n=100:", work_calc(100, 1, 2, lambda n: n))
 	print("n=1000:", work_calc(1000, 1, 2, lambda n: n))
 	print("n=10000:", work_calc(10000, 1, 2, lambda n: n))
-	test_compare_work()
+

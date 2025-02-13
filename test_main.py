@@ -25,13 +25,13 @@ def test_compare_work():
 		sizes = [10, 20, 50, 100, 1000, 5000]
 
 		# Case 1: Root-Dominated (Recursion dominates: a/(b^c) > 1)
-		work_fn1 = lambda n: work_calc(n, 8, 2, lambda n: n**2)  # b = 2
+		work_fn1 = lambda n: work_calc(n, 16, 2, lambda n: n**2)  # b = 2
 
 		# Case 2: Balanced Case (a/(b^c) = 1)
-		work_fn2 = lambda n: work_calc(n, 8, 4, lambda n: n**2)  # b = 4
+		work_fn2 = lambda n: work_calc(n, 16, 4, lambda n: n**2)  # b = 4
 
 		# Case 3: Work-Dominated (Work dominates: a/(b^c) < 1)
-		work_fn3 = lambda n: work_calc(n, 8, 8, lambda n: n**2)  # b = 8
+		work_fn3 = lambda n: work_calc(n, 16, 8, lambda n: n**2)  # b = 8
 
 		print("\nComparing Work Cases for Different Values of b:")
 
